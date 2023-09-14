@@ -7,12 +7,14 @@ import { AuthGuard } from 'src/auth/authGuard/auth.guard';
 import { PublicationRepository } from './repository/publication.repository';
 import { Prisma } from '@prisma/client';
 import { PrismaPublicationRepository } from './repository/implementation/prismaPublication.implementation';
+import { UserService } from 'src/user/user.service';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
   imports: [
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-    }),],
+    }), UserModule],
   controllers: [PublicationController],
   providers: [PublicationService,
     AuthService,

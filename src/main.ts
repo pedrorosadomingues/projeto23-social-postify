@@ -8,8 +8,12 @@ import { PrismaClientExceptionFilter } from 'nestjs-prisma';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const { httpAdapter } = app.get(HttpAdapterHost);
+  const PORT = process.env.PORT || 3000;
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3000);
+  await app.listen(PORT).then(() => {
+    console.log(`Server running on port ${PORT}`)
+  }
+  );
 }
 bootstrap();
